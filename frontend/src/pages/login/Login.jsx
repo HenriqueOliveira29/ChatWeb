@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
+import {Link} from "react-router-dom"
 
 const Login = () => {
   return (
@@ -24,7 +25,7 @@ const Login = () => {
                     <input type="password" placeholder='Enter Password' className='w-full input input-bordered h-10 max-w-xs' />
                 </div>
 
-                <a href="#" className='text-sm hover:underline hover:text-orange-500 mt-2 inline-block'>{"Don't"} have an account?</a>
+                <Link to="/signup" className='text-sm hover:underline hover:text-orange-500 mt-2 inline-block'>{"Don't"} have an account?</Link>
 
                 <div>
                     <button className='btn btn-block btn-sm mt-2 text-gray-100 hover:bg-orange-500'>Login</button>
