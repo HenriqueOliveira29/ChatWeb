@@ -1,17 +1,27 @@
-const Message = () => {
+import {useAuthContext} from "../../context/AuthContext"
+import useConversation from "../../store/useConversation";
+import { extractTime} from "../../utils/extractTime"
+
+const Message = ({message}) => {
+  const {authUser} = useAuthContext();
+  const {selectedConversation } = useConversation();
+  const fromMe = message.senderId === authUser._id;
+  const profilePic = fromMe ? authUser.profilePic : selectedConversation?.profilePic;
+  const bubleBgColor = fromMe ? "bg-orange-500" : "";
   return (
-      <div className="chat chat-start">
+      <div className={`chat ${fromMe ? "chat-end" : "chat-start"}`}>
         <div className="chat-image avatar">
           <div className="w-10 rounded-full">
             <img
               alt="Tailwind CSS chat bubble component"
-              src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+              src={profilePic}
             />
           </div>
         </div>
-        <div className="chat-bubble">
-          It was said that you would, destroy the Sith, not join them.
+        <div className={`chat-bubble text-white ${bubleBgColor}`}>
+          {message.message}
         </div>
+        <div className="chat-footer opacity-50 text-xs flex gap-1 items-center">{extractTime(message.createdAt)}</div>
       </div>
   );
 };
